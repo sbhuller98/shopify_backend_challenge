@@ -7,6 +7,7 @@ def index(request):
     if request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
         if form.is_valid():
+            print("here")
             newdoc = Images(image=request.FILES['image'], category=request.POST['category'], title=request.POST['title'])
             newdoc.save()
 
