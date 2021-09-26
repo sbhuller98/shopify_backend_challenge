@@ -11,8 +11,6 @@ def index(request):
             newdoc = Images(image=request.FILES['image'], category=request.POST['category'], title=request.POST['title'])
             newdoc.save()
 
-    else:
-        form = UploadImageForm()  # An empty, unbound form
     images = Images.objects.all()
     context = {'images': images}
     return render(request, 'image_repo/index.html', context)

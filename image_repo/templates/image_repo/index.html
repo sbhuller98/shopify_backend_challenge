@@ -41,7 +41,7 @@
           name="category"
           placeholder="Choose a category"
         />
-        <input class="form-control" type="file" name="image" multiple />
+        <input class="form-control" type="file" name="image" accept="image/*" />
         <input type="submit" value="Upload" />
       </form>
     </div>
@@ -52,8 +52,7 @@
         <img
           src="{{ document.image.url }}"
           alt="{{ document.image.name }}"
-          width="300"
-          height="300"
+          style="width: 55vw; min-width: 330px"
         />
         {% endfor %}
       </ul>
