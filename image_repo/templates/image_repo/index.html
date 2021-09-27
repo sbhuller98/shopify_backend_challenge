@@ -20,42 +20,96 @@
   </head>
 
   <body>
-    <h1>Welcome to Image Storage</h1>
-    <div>
-      <h3>Upload a new image:</h3>
-      <form
-        action="{% url 'index' %}"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        {% csrf_token %} {{ message }}
-        <input
-          class="form-control"
-          type="text"
-          name="title"
-          placeholder="Image Name"
-        />
-        <input
-          class="form-control"
-          type="text"
-          name="category"
-          placeholder="Choose a category"
-        />
-        <input class="form-control" type="file" name="image" accept="image/*" />
-        <input type="submit" value="Upload" />
-      </form>
+    <div class="m-3 p-3">
+      <h1>Welcome to Image Storage</h1>
+      <div>
+        <h3>Upload a new image:</h3>
+        <form
+          action="{% url 'postsubmit' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ message }}
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            placeholder="Image Name"
+          />
+          <input
+            class="form-control"
+            type="text"
+            name="category"
+            placeholder="Specify a category"
+          />
+          <input
+            class="form-control"
+            type="file"
+            name="image"
+            accept="image/*"
+          />
+          <input type="submit" value="Upload Files" />
+        </form>
+      </div>
+      <div>
+        <h3>Search:</h3>
+        <form action="{% url 'search' %}" method="get">
+          {{ message }}
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            placeholder="Image Search"
+          />
+          <input
+            class="form-control"
+            type="text"
+            name="category"
+            placeholder="Category Search"
+          />
+          <input type="submit" value="Seach" />
+        </form>
+        <form action="{% url 'index' %}" method="get">
+          {{ message }}
+          <input type="submit" value="See All Images" />
+        </form>
+      </div>
+      <div>
+        All documents in the database:
+        <ul>
+          {% for document in images %}
+          <img
+            onclick="handleImageClick('{{document.id}}', this)"
+            src="{{ document.image.url }}"
+            alt="{{ document.image.name }}"
+            class="m-2"
+            style="max-width: 330px"
+          />
+          <input
+            class="form-check-input mt-5 mx-2"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+          />
+          <h5>{{document.title}}</h5>
+          <p>{{document.category}}</p>
+          <p>{{document.date_added}}</p>
+
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-    <div>
-      All documents in the database:
-      <ul>
-        {% for document in images %}
-        <img
-          src="{{ document.image.url }}"
-          alt="{{ document.image.name }}"
-          style="width: 55vw; min-width: 330px"
-        />
-        {% endfor %}
-      </ul>
-    </div>
+    <script>
+      var imagesClicked = [];
+      function handleImageClick(id, el) {
+        if (imagesClicked.includes(id)) {
+          el.style.borderStyle = "none";
+          imagesClicked = imagesClicked.filter((item) => item !== id);
+        } else {
+          imagesClicked.push(id);
+          el.style.borderStyle = "solid";
+        }
+      }
+    </script>
   </body>
 </html>
