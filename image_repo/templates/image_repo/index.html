@@ -20,6 +20,14 @@
   </head>
 
   <body>
+    <div class="m-2">
+      {% if user.is_authenticated %}
+      <p>User: {{ user.get_username }}</p>
+      <p><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></p>
+      {% else %}
+      <p><a href="{% url 'login'%}?next={{request.path}}">Login</a></p>
+      {% endif %}
+    </div>
     <div class="m-3 p-3">
       <h1>Welcome to Image Storage</h1>
       <div>
@@ -35,20 +43,23 @@
             type="text"
             name="title"
             placeholder="Image Name"
+            required="true"
           />
           <input
             class="form-control"
             type="text"
             name="category"
             placeholder="Specify a category"
+            required="true"
           />
           <input
             class="form-control"
             type="file"
             name="image"
             accept="image/*"
+            required="true"
           />
-          <input type="submit" value="Upload Files" />
+          <input type="submit" class="btn btn-primary" value="Upload Files" />
         </form>
       </div>
       <div>
@@ -67,16 +78,34 @@
             name="category"
             placeholder="Category Search"
           />
-          <input type="submit" value="Seach" />
+          <input
+            style="display: inline-block"
+            class="btn btn-primary"
+            type="submit"
+            value="Search"
+          />
         </form>
         <form action="{% url 'index' %}" method="get">
           {{ message }}
-          <input type="submit" value="See All Images" />
+          <input class="btn btn-primary" type="submit" value="See All Images" />
+        </form>
+        <form name="urlForm" method="post" action="{% url 'deleteImages'%}">
+          {% csrf_token %}
+          <input
+            type="hidden"
+            name="valuesToDelete"
+            value=""
+            id="js_data_input"
+          />
+          <input
+            class="btn btn-danger"
+            type="submit"
+            value="Delete Selected Files"
+          />
         </form>
       </div>
       <div>
-        All documents in the database:
-        <ul>
+        <ul style="display: inline-block">
           {% for document in images %}
           <img
             onclick="handleImageClick('{{document.id}}', this)"
@@ -85,20 +114,14 @@
             class="m-2"
             style="max-width: 330px"
           />
-          <input
-            class="form-check-input mt-5 mx-2"
-            type="checkbox"
-            value=""
-            id="flexCheckDefault"
-          />
           <h5>{{document.title}}</h5>
           <p>{{document.category}}</p>
           <p>{{document.date_added}}</p>
-
           {% endfor %}
         </ul>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
       var imagesClicked = [];
       function handleImageClick(id, el) {
@@ -108,7 +131,9 @@
         } else {
           imagesClicked.push(id);
           el.style.borderStyle = "solid";
+          el.style.borderColor = "red";
         }
+        $("#js_data_input").val(imagesClicked);
       }
     </script>
   </body>

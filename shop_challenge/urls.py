@@ -23,4 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('image_repo.urls'))
 ] 
+
+'''Adds path to media folder for saving user file uploads'''
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+'''Adds Django authentication paths.'''
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
