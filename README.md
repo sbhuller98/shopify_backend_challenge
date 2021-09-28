@@ -66,3 +66,13 @@ You can search using either image name, image category, or both. The search resu
 Images can be deleted. Simply click on an image to select it and it will be highlighted with a red border. You can select as many images as you like. Once you are done, simply click the 'Delete Selected Files' button. All selected images will be deleted and you will see the remaining images only.
 
 **WARNING: Deleting files is permanent and cannot be undone.**
+
+## Testing
+
+To run tests, please use the following command once you have succesfully setup.
+
+```bash
+$ python3 manage.py test
+```
+
+**Note: You may have to update login details for the tests in the file shop_challenge/image_repo/tests.py.**
