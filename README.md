@@ -31,7 +31,7 @@ You should then be able to go the address provided in your terminal. I have crea
 
 Username: "shopifyrocks", Password: "hireme123"
 
-Note: If you cannot log in with the provided user details, you may have to set up an account yourself. Please follow the instructions below only if you cannot log in with the provided details.
+**Note: If you cannot log in with the provided user details, you may have to set up an account yourself. Please follow the instructions below only if you cannot log in with the provided details.**
 
 Run the following command:
 
@@ -39,13 +39,13 @@ Run the following command:
 $ python3 manage.py createsuperuser
 ```
 
-Then follow the instructions on the screen to create a new superuser account. WHen finished, run the following command again:
+Then follow the instructions on the screen to create a new superuser account. When finished, run the following command again:
 
 ```bash
 $ python3 manage.py runserver
 ```
 
-Then append '/admin' to the address provided by Django. It will prompt you to sing in, do so with the superuser account you recently created. You will the be able to create additional users by clicking on the User object link on the left side of the page. For detailed instrucitons, please refer to Django [documentation](https://docs.djangoproject.com/en/1.8/intro/tutorial02/).
+Then append '/admin' to the address provided by Django. It will prompt you to sign in, do so with the superuser account you recently created. You will then be able to create additional users by clicking on the User object link on the left side of the page. For detailed instructions, please refer to [Django documentation](https://docs.djangoproject.com/en/1.8/intro/tutorial02/).
 
 ## Usage
 
@@ -55,7 +55,7 @@ The main page has a file upload section, a search section, and buttons to view a
 
 ### Uploading
 
-Once you have successfully logge in, the application will take you to the main page. From here, you can upload images. Each image to be uploaded requires a name and category for search puproses. Only one file can be uploaded at a time but you can upload as many images as you like, given you have space.
+Once you have successfully logged in, the application will take you to the main page. From here, you can upload images. Each image to be uploaded requires a name and category for search puproses. Only one file can be uploaded at a time but you can upload as many images as you like, given you have space.
 
 ### Search
 
@@ -65,4 +65,4 @@ You can search using either image name, image category, or both. The search resu
 
 Images can be deleted. Simply click on an image to select it and it will be highlighted with a red border. You can select as many images as you like. Once you are done, simply click the 'Delete Selected Files' button. All selected images will be deleted and you will see the remaining images only.
 
-WARNING: Deleting files is permanent and cannot be undone.
+**WARNING: Deleting files is permanent and cannot be undone.**
